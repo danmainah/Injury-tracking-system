@@ -1,8 +1,8 @@
 import React from "react"
 import type { GetStaticProps } from "next"
-import Layout from "../components/layout"
+import Layout from "../components/Layout";
 import Post, { PostProps } from "../components/Post"
-import prisma from "../lib/prisma";
+import prisma from "../src/lib/prisma";
 
 export const getStaticProps: GetStaticProps = async () => {
   const feed = await prisma.post.findMany({

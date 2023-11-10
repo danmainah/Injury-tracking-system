@@ -1,8 +1,7 @@
-import React from "react"
-import type { GetStaticProps } from "next"
+import prisma from "@/lib/prisma";
+import { GetStaticProps } from "next";
 import Layout from "../components/Layout";
-import Post, { PostProps } from "../components/Post"
-import prisma from "../src/lib/prisma";
+import Post from "../components/Post";
 
 export const getStaticProps: GetStaticProps = async () => {
   const feed = await prisma.post.findMany({
@@ -12,12 +11,12 @@ export const getStaticProps: GetStaticProps = async () => {
         select: { name: true },
       },
     },
-  })
+  });
   return {
     props: { feed },
     revalidate: 10,
-  }
-}
+  };
+};
 
 type Props = {
   feed: PostProps[]

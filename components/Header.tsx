@@ -1,19 +1,19 @@
-import React from "react";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import { signOut, useSession } from "next-auth/react";
+import React from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { signOut, useSession } from 'next-auth/react';
 
 const Header: React.FC = () => {
   const router = useRouter();
   const isActive: (pathname: string) => boolean = (pathname) =>
     router.pathname === pathname;
 
-  const {data: session, status} = useSession();
+  const { data: session, status } = useSession();
 
   let left = (
     <div className="left">
-      <Link href="/" legacyBehavior>
-        <a className="bold" data-active={isActive("/")}>
+      <Link href="/">
+        <a className="bold" data-active={isActive('/')}>
           Feed
         </a>
       </Link>
@@ -24,11 +24,11 @@ const Header: React.FC = () => {
 
         a {
           text-decoration: none;
-          color: #000;
+          color: var(--geist-foreground);
           display: inline-block;
         }
 
-        .left a[data-active="true"] {
+        .left a[data-active='true'] {
           color: gray;
         }
 
@@ -41,11 +41,11 @@ const Header: React.FC = () => {
 
   let right = null;
 
-  if (status === "loading") {
+  if (status === 'loading') {
     left = (
       <div className="left">
-        <Link href="/" legacyBehavior>
-          <a className="bold" data-active={isActive("/")}>
+        <Link href="/">
+          <a className="bold" data-active={isActive('/')}>
             Feed
           </a>
         </Link>
@@ -56,11 +56,11 @@ const Header: React.FC = () => {
 
           a {
             text-decoration: none;
-            color: #000;
+            color: var(--geist-foreground);
             display: inline-block;
           }
 
-          .left a[data-active="true"] {
+          .left a[data-active='true'] {
             color: gray;
           }
 
@@ -85,13 +85,13 @@ const Header: React.FC = () => {
   if (!session) {
     right = (
       <div className="right">
-        <Link href="/api/auth/signin" legacyBehavior>
-          <a data-active={isActive("/signup")}>Log in</a>
+        <Link href="/api/auth/signin">
+          <a data-active={isActive('/signup')}>Log in</a>
         </Link>
         <style jsx>{`
           a {
             text-decoration: none;
-            color: #000;
+            color: var(--geist-foreground);
             display: inline-block;
           }
 
@@ -104,7 +104,7 @@ const Header: React.FC = () => {
           }
 
           .right a {
-            border: 1px solid black;
+            border: 1px solid var(--geist-foreground);
             padding: 0.5rem 1rem;
             border-radius: 3px;
           }
@@ -116,13 +116,13 @@ const Header: React.FC = () => {
   if (session) {
     left = (
       <div className="left">
-        <Link href="/" legacyBehavior>
-          <a className="bold" data-active={isActive("/")}>
+        <Link href="/">
+          <a className="bold" data-active={isActive('/')}>
             Feed
           </a>
         </Link>
-        <Link href="/drafts" legacyBehavior>
-          <a data-active={isActive("/drafts")}>My drafts</a>
+        <Link href="/drafts">
+          <a data-active={isActive('/drafts')}>My drafts</a>
         </Link>
         <style jsx>{`
           .bold {
@@ -131,11 +131,11 @@ const Header: React.FC = () => {
 
           a {
             text-decoration: none;
-            color: #000;
+            color: var(--geist-foreground);
             display: inline-block;
           }
 
-          .left a[data-active="true"] {
+          .left a[data-active='true'] {
             color: gray;
           }
 
@@ -150,7 +150,7 @@ const Header: React.FC = () => {
         <p>
           {session.user.name} ({session.user.email})
         </p>
-        <Link href="/create" legacyBehavior>
+        <Link href="/create">
           <button>
             <a>New post</a>
           </button>
@@ -161,7 +161,7 @@ const Header: React.FC = () => {
         <style jsx>{`
           a {
             text-decoration: none;
-            color: #000;
+            color: var(--geist-foreground);
             display: inline-block;
           }
 
@@ -180,7 +180,7 @@ const Header: React.FC = () => {
           }
 
           .right a {
-            border: 1px solid black;
+            border: 1px solid var(--geist-foreground);
             padding: 0.5rem 1rem;
             border-radius: 3px;
           }

@@ -1,9 +1,9 @@
-import React from "react";
-import { GetServerSideProps } from "next";
-import Layout from "../components/Layout";
-import Post, { PostProps } from "../components/Post";
-import { useSession, getSession } from "next-auth/react";
-import prisma from "../src/lib/prisma";
+import React from 'react';
+import { GetServerSideProps } from 'next';
+import { useSession, getSession } from 'next-auth/react';
+import Layout from '../components/Layout';
+import Post, { PostProps } from '../components/Post';
+import prisma from '@/lib/prisma';
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const session = await getSession({ req });
@@ -14,7 +14,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
 
   const drafts = await prisma.post.findMany({
     where: {
-      author: { email: session?.user?.email },
+      author: { email: session.user.email },
       published: false,
     },
     include: {
@@ -33,7 +33,7 @@ type Props = {
 };
 
 const Drafts: React.FC<Props> = (props) => {
-  const {data: session} = useSession();
+  const { data: session } = useSession();
 
   if (!session) {
     return (
@@ -58,7 +58,7 @@ const Drafts: React.FC<Props> = (props) => {
       </div>
       <style jsx>{`
         .post {
-          background: white;
+          background: var(--geist-background);
           transition: box-shadow 0.1s ease-in;
         }
 
